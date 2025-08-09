@@ -1,4 +1,4 @@
-# Spotify Data Pipeline – Extract, Transform, and Analyze with AWS  
+# Spotify Data Pipeline – Extract, Transform, and Analyze with AWS and Snowflake 
 **Author:** Lagudu Sai teja 
 
 ---

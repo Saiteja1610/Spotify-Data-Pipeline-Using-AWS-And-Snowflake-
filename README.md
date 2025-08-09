@@ -1,50 +1,81 @@
-🎵 Spotify Data Pipeline – AWS + Snowflake + Power BI
-This project implements a serverless, scalable, and automated ETL pipeline to extract, transform, and load Spotify data for analytics. It leverages AWS Lambda, AWS Glue, Snowflake, and Power BI for an end-to-end data workflow.
+🎵 Spotify ETL Pipeline – AWS | Snowflake | Power BI
+📌 Project Description
+This project automates the end-to-end ETL process for Spotify data, enabling analytics and reporting in Power BI.
+It uses AWS Lambda for data extraction, AWS Glue (Apache Spark) for transformation, Snowpipe for loading into Snowflake, and Power BI for visualization.
+The pipeline runs serverlessly and updates automatically every day.
 
-📌 Workflow Overview
-Extract
+🛠 Architecture Components
+1. Data Extraction (EXTRACT)
+Source: Spotify API (via Python script using spotipy or Requests library).
 
-Trigger: Amazon CloudWatch triggers AWS Lambda daily.
+AWS Lambda:
 
-Extraction: AWS Lambda (Python) calls the Spotify API to fetch music data.
+Triggered by Amazon CloudWatch daily.
 
-Storage: Raw JSON/CSV files are saved to Amazon S3 (Raw Zone).
+Fetches playlists, songs, artists, and metadata.
 
-Transform
+Saves raw data to Amazon S3 (Raw Data Bucket) in JSON/CSV format.
 
-Event Trigger: An S3 ObjectPut event triggers AWS Glue.
+2. Data Transformation (TRANSFORM)
+Trigger: S3 Object Put Event when new raw data arrives.
 
-Processing: AWS Glue (Apache Spark) cleans, normalizes, and structures the raw data.
+AWS Glue Job (Apache Spark):
 
-Storage: Processed data is saved in Amazon S3 (Transformed Zone).
+Cleans, normalizes, and enriches the data.
 
-Load
+Flattens nested JSON structures from Spotify API.
 
-Snowpipe automatically ingests transformed data from S3 into Snowflake.
+Formats timestamps & standardizes schema.
 
-Data is then available for reporting and visualization in Power BI.
+Removes duplicates & nulls.
 
-🔹 Architecture
+Saves processed data to Amazon S3 (Transformed Data Bucket).
 
+3. Data Loading (LOAD)
+Snowpipe:
 
-Spotify API → AWS CloudWatch → AWS Lambda → Amazon S3 (Raw)
+Continuously monitors S3 transformed bucket.
 
-S3 Event Trigger → AWS Glue (Spark) → Amazon S3 (Transformed)
+Automatically ingests new data into Snowflake tables without manual intervention.
 
-Snowpipe → Snowflake → Power BI
+Snowflake:
 
-🚀 Features
-Automated Scheduling – CloudWatch triggers Lambda daily.
+Acts as a centralized data warehouse for querying and analytics.
 
-Serverless Processing – Lambda & Glue handle extraction and transformation.
+4. Data Visualization
+Power BI:
 
-Event-Driven ETL – S3 triggers automate the pipeline without manual intervention.
+Connects directly to Snowflake.
 
-Scalable Storage – Raw & transformed data stored in separate S3 buckets.
+Builds dashboards for insights:
 
-Cloud Data Warehouse – Snowflake stores analytics-ready datasets.
+Top Artists & Tracks.
 
-Interactive Dashboards – Power BI visualizes trends, recommendations, and KPIs.
+Genre Popularity Trends.
+
+Listening Behavior Over Time.
+
+🔄 Data Flow Summary
+Spotify API → CloudWatch (daily trigger)
+
+CloudWatch → AWS Lambda (extracts data)
+
+Lambda → S3 Raw Data Bucket
+
+S3 Event → AWS Glue (transforms data)
+
+Glue → S3 Transformed Data Bucket
+
+S3 → Snowpipe → Snowflake (data warehouse)
+
+Snowflake → Power BI (dashboards & analytics)
+
+🚀 Features & Benefits
+✅ Fully Serverless – No manual infrastructure to manage.
+✅ Automated Daily Refresh – Keeps dashboards always up-to-date.
+✅ Scalable & Cost-Effective – Handles growing Spotify data efficiently.
+✅ Real-Time Loading – Snowpipe ingests data within minutes.
+✅ BI-Ready – Power BI can consume clean, analytics-ready da
 
 🛠️ Tech Stack
 Tool / Service	Purpose

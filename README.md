@@ -1,5 +1,7 @@
 🎵 Spotify ETL Pipeline – AWS | Snowflake | Power BI
+
 📌 Project Description
+
 This project automates the end-to-end ETL process for Spotify data, enabling analytics and reporting in Power BI.
 It uses AWS Lambda for data extraction, AWS Glue (Apache Spark) for transformation, Snowpipe for loading into Snowflake, and Power BI for visualization.
 The pipeline runs serverlessly and updates automatically every day.

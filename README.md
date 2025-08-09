@@ -67,7 +67,7 @@ The architecture is **serverless**, **scalable**, and supports **daily automated
 ---
 
 ## 📌 Architecture Diagram  
-![Spotify pipeline architecture](ProjectArchicture.png)
+![Spotify pipeline architecture](https://github.com/user-attachments/assets/4e5b5f2d-b830-4999-abd6-7e8a31b41597)
 
 ---
 
